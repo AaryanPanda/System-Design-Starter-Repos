@@ -42,7 +42,7 @@ CREATE TABLE agents (
 CREATE TABLE tickets (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   subject     TEXT NOT NULL,
-  body        TEXT,
+  body        TEXT NOT NULL,   -- ERD does not mark it nullable -> required
   priority    TEXT NOT NULL CHECK (priority IN ('low', 'medium', 'high', 'urgent')),
   status      TEXT NOT NULL CHECK (status IN ('open', 'pending', 'resolved', 'closed')) DEFAULT 'open',
   org_id      UUID NOT NULL REFERENCES organizations(id) ON DELETE RESTRICT,
